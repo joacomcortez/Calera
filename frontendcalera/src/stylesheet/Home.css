@@ -1,0 +1,34 @@
+.title {
+  text-align: center;
+  margin-top: 7%;
+  font-size: 7rem;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #c2cad0 0%,
+    #c2b9b0 29%,
+    #7e685a 67%,
+    #edc7b7 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+}
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+.me {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+}
+body {
+  background-color: #c2b9b0;
+}

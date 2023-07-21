@@ -1,0 +1,2 @@
+module BoarduserHelper
+end

@@ -1,0 +1,18 @@
+.wrappercreate {
+  max-width: 450px;
+  min-height: 250px;
+  margin: 80px auto;
+  padding: 80px 60px 60px 85px;
+  background-color: #ecf0f3;
+  border-radius: 15px;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.buttoncreate {
+  height: 80px;
+  width: 260px;
+  font-size: larger;
+  background-color: #ecf0f3;
+  border-radius: 8px;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}

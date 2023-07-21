@@ -1,0 +1,26 @@
+.wrapperjoin {
+  max-width: 450px;
+  min-height: 250px;
+  margin: 80px auto;
+  padding: 40px 30px 30px 30px;
+  background-color: #ecf0f3;
+  border-radius: 15px;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+.buttonid {
+  margin-left: 40%;
+  margin-top: 55px;
+  height: 70px;
+  width: 80px;
+}
+.entradaid {
+  margin-left: 25%;
+  margin-top: 25px;
+  height: 35px;
+  font-size: 15px;
+}
+.contenedor {
+  display: auto;
+  margin: auto 0;
+  height: 100px;
+}
