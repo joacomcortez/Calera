@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     member do
       post :startdeck
       post :deal_cards
+      post :play_card
+      post :join
     end
   end
 end

@@ -1,4 +1,5 @@
 class Board < ApplicationRecord
+  enum :status {waiting_for_players: 1,  waiting_for_cards: 2, game_over:3}
   has_many :cards, class_name: 'card', foreign_key: 'reference_id'
   has_many :Boarduser
 
