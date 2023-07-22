@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   end
   resources :board do
     member do
-      post :startdeck
+      post :start_game
       post :deal_cards
       post :play_card
       post :join
+      get :cards_dealed
+      post :place_bet
     end
   end
 end
