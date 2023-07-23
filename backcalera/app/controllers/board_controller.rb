@@ -25,9 +25,10 @@ class BoardController < ApplicationController
       render status: 400, json: { message: @board.error.details }
     end
   end
+
   def join
     @board = Board.find_by(params[:id])
-    @user = User.find_by(params[:user_id])
+    @user = User.find(params[:user_id])
     @board.join_player(@user)
     if @board.save
       render status: 200, json: { board: @board }
@@ -35,7 +36,7 @@ class BoardController < ApplicationController
       render status: 400, json: { message: @board.error.details }
     end
   end
-  
+
   def show
     @board = Board.find_by(params[:id])
     if @board.exists?
@@ -58,10 +59,10 @@ class BoardController < ApplicationController
   def cards_dealed
     @board = Board.find_by(id: params[:id])
     @user = User.find_by(params[:user_id])
-    
+
     cards = @board.get_cards_dealed(@user)
     if cards.exists?
-      render status: 200, json: { cards: cards }
+      render status: 200, json: { cards: }
     else
       render status: 400, json: { message: 'cards not found' }
     end

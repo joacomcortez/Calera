@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post :join
       get :cards_dealed
       post :place_bet
+      post :check_round
+      post :finish_round
     end
   end
 end
