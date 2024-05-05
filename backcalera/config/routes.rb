@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       post :place_bet
       post :check_round
       post :finish_round
+      get :get_board_user
     end
   end
 end

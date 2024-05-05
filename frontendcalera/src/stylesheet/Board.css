@@ -1,0 +1,69 @@
+.idNumber {
+  float: right;
+  margin-right: 50px;
+  background: none;
+}
+.buttonDeal {
+  background: none;
+  height: 20px;
+}
+.boardContainer {
+  font-size: large;
+  background-color: #35654d;
+  border-color: black;
+  height: 100vh;
+  display: column;
+}
+.player12 {
+  background: none;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-color: black;
+  border-width: 3px;
+  height: 25vh;
+  display: flex;
+  justify-content: space-between;
+}
+.player3 {
+  background: none;
+  padding-top: 5px;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  border-width: 3px;
+  height: 25vh;
+  justify-content: center;
+}
+.player4 {
+  margin-bottom: 5px;
+  background: none;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  border-width: 3px;
+  height: 25vh;
+  justify-content: center;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  height: 25vh;
+  background-color: bisque;
+}
+.requestCards {
+  margin-top: 1vh;
+  height: 4vh;
+}
+.cardsContainer {
+  display: flex;
+  gap: 12px;
+}
+.Card {
+  display: column;
+  height: 22vh;
+  width: 10vw;
+  margin-top: 10px;
+}
+.suit {
+  margin-top: 25px;
+}

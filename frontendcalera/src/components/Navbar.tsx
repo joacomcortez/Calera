@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import { NavbarData } from './NavbarData';
+import { Link, useNavigate } from 'react-router-dom';
+import { NavbarData, useNavbarData } from './NavbarData';
 import '../stylesheet/Navbar.css';
 import { IconContext } from 'react-icons';
 import { useSessionUser } from '../Store/userStore';
@@ -11,18 +12,25 @@ import { showImage } from '../User/userService';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const { navbarData } = useNavbarData();
   const showSidebar = () => setSidebar(!sidebar);
 
   const [imageurl, setImageurl] = useState<string>('');
 
   const user = useSessionUser();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate(`/login`);
+    }
+  }, []);
 
-  showImage(user?.id)
-    .then((response) => {
-      setImageurl('http://127.0.0.1:3000' + response.url);
-    })
-    .catch(() => console.log('error'));
+  // NO SE NECESITA CAPAZ
+  // showImage(user?.id)
+  //   .then((response) => {
+  //     setImageurl('http://127.0.0.1:3000' + response.url);
+  //   })
+  //   .catch(() => console.log('error'));
 
   return (
     <>
@@ -34,7 +42,12 @@ function Navbar() {
           {user && (
             <div className='userinfo'>
               <div className='usernameinfo'>{user.username}</div>
-              <img className='image' src={imageurl}></img>
+              {user.url && (
+                <img
+                  className='image'
+                  src={'http://localhost:3000' + user.url}
+                ></img>
+              )}
             </div>
           )}
         </div>
@@ -45,7 +58,7 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {NavbarData.map((item, index) => {
+            {navbarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>

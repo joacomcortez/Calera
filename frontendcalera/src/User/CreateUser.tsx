@@ -29,6 +29,7 @@ function CreateUser() {
         <div className='form-field d-flex align-items-center'>
           <span className='far fa-user'></span>
           <input
+            autoFocus
             type='text'
             name='userName'
             id='userName'
@@ -63,6 +64,7 @@ function CreateUser() {
             onChange={(e: any) => {
               setPicture(e.target.files[0]);
             }}
+            accept='image/*'
           />
         </div>
         <button className='btn mt-3' type='submit'>

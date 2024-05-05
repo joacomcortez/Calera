@@ -1,18 +1,25 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { current } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useSessionUser } from '../Store/userStore';
 
 export interface User {
   username: string;
   id: number;
+  url: string;
+}
+
+export interface Boarduser {
+  id: number;
+  cards: string[];
+  cards_played: string[];
+  score: number;
+  user: User;
 }
 
 export interface intBoard {
   id: number;
-  user1: string;
-  user2: string;
-  user3: string;
-  user4: string;
+  boardusers: Boarduser[];
 }
 
 export async function postLogin(
@@ -102,7 +109,7 @@ export async function createBoard(): Promise<intBoard | undefined> {
   return response;
 }
 
-export async function showBoard(id: number) {
+export async function showBoard(id: number | string) {
   let response;
   try {
     response = (await axios.get(`http://localhost:3000/board/${id}`)).data
@@ -114,11 +121,48 @@ export async function showBoard(id: number) {
   return response;
 }
 
-export async function dealCards(id: number | undefined) {
+export async function joinBoard(boardid: number, user: User) {
+  try {
+    return (
+      await axios.post(`http://localhost:3000/board/${boardid}/join`, {
+        user_id: user.id,
+      })
+    ).data;
+  } catch (err: any) {
+    console.log('error joining board');
+  }
+}
+
+export async function playCard(boardid: number, card: string, user: User) {
+  try {
+    return (
+      await axios.post(`http://localhost:3000/board/${boardid}/play_card`, {
+        card,
+        // user_id: user.id,
+      })
+    ).data;
+  } catch (err: any) {
+    console.log('error joining board');
+  }
+}
+
+export async function dealCards(id: number) {
   try {
     axios.post(`http://localhost:3000/board/${id}/deal_cards`);
   } catch (err: any) {
     console.log('error dealing cards');
+  }
+}
+
+export async function getCardsDealed(boardid: number, user: User) {
+  try {
+    return (
+      await axios.get(`http://localhost:3000/board/${boardid}/cards_dealed`, {
+        params: { user },
+      })
+    ).data;
+  } catch (err: any) {
+    console.log('error getting cards');
   }
 }
 

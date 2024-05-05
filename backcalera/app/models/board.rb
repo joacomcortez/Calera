@@ -36,6 +36,8 @@ class Board < ApplicationRecord
   end
 
   def join_player(user)
+    return if boardusers.any? { |player| player.user_id == user.id }
+
     player = Boarduser.new(user:)
     boardusers.push(player)
   end
@@ -52,7 +54,7 @@ class Board < ApplicationRecord
     end
   end
 
-  def get_cards_dealed(user)
+  def cards_dealed(user)
     player = boardusers.find_by(user:)
     player.cards
   end
@@ -65,11 +67,5 @@ class Board < ApplicationRecord
     a.delete(i)
     player.cards = a.to_json
     player.save
-  end
-
-  private
-
-  def board_params
-    params.permit(:user1, :user2, :user3, :user4, :deck)
   end
 end

@@ -5,6 +5,7 @@ import { useState } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { postLogin } from './userService';
 import { updateSessionUser } from '../Store/userStore';
+import { userInfo } from 'os';
 
 function Login() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function Login() {
         <div className='form-field d-flex align-items-center'>
           <span className='far fa-user'></span>
           <input
+            autoFocus
             type='text'
             autoComplete='off'
             value={user}

@@ -38,8 +38,19 @@ class UserController < ApplicationController
 
   def login
     @user = User.find_by(user_params)
+
+    user_json = @user.as_json
+
+    user_json[:url] = if @user.image.attached?
+                        Rails.application.routes.url_helpers.rails_blob_path(@user.image,
+                                                                             only_path: true)
+                      else
+                        ''
+                      end
+
     if @user.present?
-      render status: 200, json: { user: @user }
+      render status: 200,
+             json: { user: user_json }
     else
       render status: 400, json: { message: 'user not found' }
     end

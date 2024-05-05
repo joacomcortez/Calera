@@ -7,9 +7,9 @@ class BoardController < ApplicationController
   end
 
   def show
-    @boards = Board.find_by(params[:id])
-    if @board.exists?
-      render status: 200, json: { board: @board }
+    @board = Board.find(params[:id])
+    if @board.present?
+      render status: 200, json: { board: @board.as_json(include: { boardusers: { include: :user } }) }
     else
       render status: 400, json: { message: 'board not found' }
     end
@@ -27,22 +27,15 @@ class BoardController < ApplicationController
   end
 
   def join
-    @board = Board.find_by(params[:id])
+    @board = Board.find(params[:id])
     @user = User.find(params[:user_id])
     @board.join_player(@user)
     if @board.save
-      render status: 200, json: { board: @board }
+      # board.as_json(include: { boardusers: { include: :user } })
+
+      render status: 200, json: { board: @board.as_json(include: { boardusers: { include: :user } }) }
     else
       render status: 400, json: { message: @board.error.details }
-    end
-  end
-
-  def show
-    @board = Board.find_by(params[:id])
-    if @board.exists?
-      render status: 200, json: { board: @board }
-    else
-      render status: 400, json: { message: 'user not found' }
     end
   end
 
@@ -59,10 +52,9 @@ class BoardController < ApplicationController
   def cards_dealed
     @board = Board.find_by(id: params[:id])
     @user = User.find_by(params[:user_id])
-
-    cards = @board.get_cards_dealed(@user)
-    if cards.exists?
-      render status: 200, json: { cards: }
+    cards = @board.cards_dealed(@user)
+    if cards.present?
+      render status: 200, json: { cards: JSON.parse(cards) }
     else
       render status: 400, json: { message: 'cards not found' }
     end
@@ -70,10 +62,20 @@ class BoardController < ApplicationController
 
   def deal_cards
     @board = Board.find_by(id: params[:id])
-    # si no existe que explote
 
-    deal_cards
+    @board.deal_cards
 
+    if @board.save
+      render status: 200, json: { board: @board }
+    else
+      render status: 400, json: { message: @board.error.details }
+    end
+  end
+
+  def play_card
+    @board = Board.find_by(id: params[:id])
+    @user = User.find_by(params[:user_id])
+    @board.play_card(@user, params[:card])
     if @board.save
       render status: 200, json: { board: @board }
     else
@@ -84,7 +86,6 @@ class BoardController < ApplicationController
   def delete_previous_hand
     @board = Board.find_by(id: params[:id])
     @board.delete_previous_hand
-
     if @board.save
       render status: 200, json: { board: @board }
     else
